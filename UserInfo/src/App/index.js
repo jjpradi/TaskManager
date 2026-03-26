@@ -18,8 +18,7 @@ const App=()=>{
 
 
 
-
-
+<BrowserRouter>
 <Routes>
 
    
@@ -34,7 +33,8 @@ const App=()=>{
 
 </Routes>
 
-    
+    </BrowserRouter>
+
 
 
 

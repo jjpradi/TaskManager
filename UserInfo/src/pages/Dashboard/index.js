@@ -53,12 +53,19 @@ const Dashboard = () => {
   };
 
   return (
-    <div  className=""  style={{display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center"}} >
+  
+  <div  className=""  style={{display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center"}} >
       <h1>User Directory</h1>
       <SearchBar search={search} setSearch={setSearch} />
       <UserTable users={filtered} sortData={sortData} />
     </div>
-  );
+    
+
+  
+);
 };
+
+
+
 
 export default Dashboard;
