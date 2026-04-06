@@ -98,19 +98,34 @@
         <div class="footer">Task Manager Project</div>
     </main>
 
-    <script src="scratch-teaching.js">
+    
+    <script >
 
- 
+console.log("shsfhw"  )
+document.body.appendChild(document.createElement("p").textContent="Hello from scratch teaching script!" )
 
 
+function addTask(){
+    console.log("Adding task...")
+    const taskInput=document.getElementById("taskInput")
+    console.log(taskInput.value)
 
-  
 
-   
-  
+const taskList=document.getElementById("taskOutput")
 
-  
+const newTask=document.createElement("li")
+
+newTask.textContent=taskInput.value
+
+taskList.appendChild(newTask) 
+
+    taskInput.value=""
+
+
+  } 
+
     </script>
+
 
   </body>
 
