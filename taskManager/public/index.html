@@ -71,9 +71,13 @@
 
                         <h4 style="margin-top:16px">Filter By Status</h4>
                         <div class="controls">
+      
                             <button class="secondary" onclick="filterTasks('all')">All</button>
+      
                             <button class="secondary" onclick="filterTasks('completed')">Completed</button>
+      
                             <button class="secondary" onclick="filterTasks('pending')">Pending</button>
+      
                         </div>
                     </div>
 
@@ -85,6 +89,9 @@
       
                           <li class="task-empty">No tasks available. Add one above.</li>
       
+
+           
+
                           </ul>
       
                       </div>
@@ -102,10 +109,112 @@
     <script >
 
 console.log("shsfhw"  )
-document.body.appendChild(document.createElement("p").textContent="Hello from scratch teaching script!" )
+
+let taskList = document.getElementById("taskOutput")
+console.log(localStorage.getItem("taskList").length  )
+console.log("task List")
+taskList.innerHTML=localStorage.getItem("taskList") || `<li class="task-empty">No  available. Add one above.</li>` 
+let completeButtons=document.querySelectorAll(".complete-btn")
+
+
+function filterTasks(pending){
+    const tasks=document.querySelectorAll(".task-item")
+    tasks.forEach(task=>{
+        if(task.classList.contains("completed")){
+            task.style.display="none"
+        }else{
+            task.style.display="flex"
+        }
+    })
+}   
+
+
+function filterTasks(status){
+    const tasks=document.querySelectorAll(".task-item")
+    tasks.forEach(task=>{
+        if(status==="completed"){
+            if(task.classList.contains("completed")){
+                task.style.display="flex"
+            }else{
+                task.style.display="none"
+            }
+        }else if(status==="pending"){
+            if(task.classList.contains("completed")){
+                task.style.display="none"
+            }else{
+                task.style.display="flex"
+            }
+        }else{
+            task.style.display="flex"
+        }
+    })
+}
+
+function filterTasks(all){
+    const tasks=document.querySelectorAll(".task-item")
+    tasks.forEach(task=>{
+        task.style.display="flex"
+    })
+    
+}
+
+function filterTasks(completed){
+    const tasks=document.querySelectorAll(".task-item")
+    tasks.forEach(task=>{
+        if(task.classList.contains("completed")){
+            task.style.display="flex"
+        }else{
+            task.style.display="none"
+        }
+    })
+}   
+
+completeButtons.forEach(btn=>{
+    btn.addEventListener("click",(e)=>{
+        const taskItem=e.target.closest(".task-item")
+        taskItem.classList.toggle("completed")
+        const isCompleted=taskItem.classList.contains("completed")
+        const completeBtn=taskItem.querySelector(".complete-btn")
+        const taskText=taskItem.querySelector("div:first-child")
+        if(isCompleted){
+            taskText.style.textDecoration="line-through"
+            completeBtn.textContent="Mark pending"
+        }else{
+            taskText.style.textDecoration="none"
+            completeBtn.textContent="Complete"
+        }
+        localStorage.setItem("taskList",taskList.innerHTML )
+    })
+})
+
+
+let deleteButtons=document.querySelectorAll(".delete-btn")
+deleteButtons.forEach(btn=>{
+    btn.addEventListener("click",(e)=>{
+        const taskItem=e.target.closest(".task-item")
+        taskList.removeChild(taskItem)
+        localStorage.setItem("taskList",taskList.innerHTML )
+    })
+})
+
+
+
+
+
+totalTasks.textContent=parseInt(taskList.children.length)
+if(completeButtons.textContent=="Mark pending"){
+    completedTasks.textContent=parseInt(completedTasks.textContent)+1
+}
+    else{
+        
+        pendingTasks.textContent=parseInt(pendingTasks.textContent)+1
+
+ }
+
 
 
 function addTask(){
+
     console.log("Adding task...")
     const taskInput=document.getElementById("taskInput")
     console.log(taskInput.value)
@@ -115,11 +224,104 @@ const taskList=document.getElementById("taskOutput")
 
 const newTask=document.createElement("li")
 
-newTask.textContent=taskInput.value
+let nos=taskList.children.length
+
+newTask.classList.add("task-item")
+newTask.style.display="flex"
+newTask.style.justifyContent="space-between"
+newTask.style.alignItems="center"
+
+
+const firstChild=(document.createElement("div"))
+const secondChild=(document.createElement("div"))
+
+
+firstChild.textContent= `${nos}. ${taskInput.value}`
+
+secondChild.innerHTML=`<button class="complete-btn">Complete</button> <button class="delete-btn">Delete</button>`   
+
+newTask.appendChild(firstChild)
+newTask.appendChild(secondChild)
+newTask.classList.add("task-btn")
+
+const completeBTN=secondChild.querySelector(".complete-btn")
+completeBTN.classList.add("secondary"    )
+let totalTasks=document.getElementById("totalTasks")
+let completedTasks=document.getElementById("completedTasks")
+
+let pendingTasks=document.getElementById("pendingTasks")
+if(completeBTN.value=="Complete"){
+    
+
+
+
+}
+
+
+
+
+
+const deleteBTN=secondChild.querySelector(".delete-btn")
+deleteBTN.classList.add("danger")
+
+deleteBTN.addEventListener("click",()=>{
+    taskList.removeChild(newTask)
+})
+
+
+totalTasks.textContent=parseInt(totalTasks.length)
+pendingTasks.textContent=parseInt(pendingTasks.textContent)+1   
+
+
+
+completeBTN.addEventListener("click",()=>{
+
+
+    if(newTask.classList.contains("completed")){
+        newTask.classList.remove("completed")
+        completeBTN.textContent="Complete"
+        firstChild.style.textDecoration="none"
+
+
+    }else{
+        newTask.classList.add("completed")
+
+        firstChild.style.textDecoration="line-through"
+        completeBTN.textContent="Mark pending"
+    }
+
+
+    if(completeBTN.textContent=="Mark pending"){
+
+
+        completedTasks.textContent=parseInt(completedTasks.textContent)+1
+    }
+})
+
+
+
+
 
 taskList.appendChild(newTask) 
 
+secondChild.classList.add("task-item-hoverable")
+
+
+
+localStorage.setItem("taskList",taskList.innerHTML )
+
+
+
+
+taskList.querySelector(".task-empty").style.display="none"
+
+
+
+
     taskInput.value=""
+
+
+
 
 
   } 

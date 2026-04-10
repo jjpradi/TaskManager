@@ -18,16 +18,9 @@
 * {
     box-sizing: border-box;
 }
-
-html {
-    scroll-behavior: smooth;
-}
-.task-item{
-
+.task-item {
 
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
     align-items: center;
     gap: 12px;
     padding: 12px 14px;
@@ -35,7 +28,16 @@ html {
     border: 1px solid var(--line);
     border-radius: 12px;
     transition: all 0.2s ease;
+
 }
+
+
+
+
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     margin: 0;
     font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
@@ -226,25 +228,19 @@ h1 {
 }
 
 .panel {
-
     padding: 18px;
-
 }
 
 .panel h3 {
-
     margin: 0 0 8px;
     font-size: 16px;
-
 }
 
 .panel p {
-
     margin: 0;
     color: var(--muted);
     font-size: 14px;
     line-height: 1.7;
-
 }
 
 /* Section */
@@ -276,13 +272,10 @@ h1 {
 }
 
 .demo-box {
-   
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid var(--line);
     border-radius: 18px;
     padding: 16px;
-
-
 }
 
 .demo-box h4 {
@@ -298,14 +291,18 @@ h1 {
 }
 
 .controls {
-
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+}
+.hoverable{
+
+    background: rgba(255, 255, 255, 0.05);
+    border-color:green;
+    transition: all 0.2s ease;
+
 
 }
-
-
 /* Buttons */
 button {
     border: 0;
@@ -318,33 +315,16 @@ button {
     cursor: pointer;
     box-shadow: 0 12px 24px rgba(102, 217, 255, .16);
 }
-
 button.primary{
 
-    background-color: green;
+    background-color: #e87989;
 }
-.sec:hover{
-    background-color: red;
-
-
-}
-
 button.secondary {
     background: rgba(255, 255, 255, 0.06);
     color: var(--text);
     border: 1px solid var(--line);
     box-shadow: none;
 }
-button.secondary:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: var(--accent);
-    color: var(--accent);
-}   
-
-
-
-
-
 
 button.danger {
     background: linear-gradient(135deg, var(--bad), #e87989);
@@ -355,8 +335,23 @@ button.danger:hover {
     box-shadow: 0 12px 24px rgba(251, 113, 133, 0.3);
 }
 
+.complete-btn:hover{
+
+    border-color:green;
+}
+
+.task-item-hoverable{
+
+
+    display:none;
+    
+}
+
+
+
 /* Input */
 input {
+
 
     width: 100%;
     background: rgba(4, 10, 20, 0.75);
@@ -365,7 +360,6 @@ input {
     border-radius: 14px;
     padding: 12px 14px;
     outline: none;
-
 }
 
 /* Task List */
@@ -381,7 +375,6 @@ input {
 }
 
 .task-list li {
-
     display: flex;
     align-items: center;
     gap: 12px;
@@ -390,20 +383,15 @@ input {
     border: 1px solid var(--line);
     border-radius: 12px;
     transition: all 0.2s ease;
-
 }
 
 .task-list li:hover {
-
     background: rgba(255, 255, 255, 0.05);
     border-color: rgba(102, 217, 255, 0.2);
-
 }
 
 .task-list li.completed {
-
     opacity: 0.65;
-
 }
 
 .task-list li.completed .task-title {
